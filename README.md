@@ -19,23 +19,44 @@ The requirments for Rust Sendmail:
 <h3>Install sendmail and configure<h3>
   
 Run Commands:
+```
+  apt-get install sendmail
+  nano /etc/hosts
+```
 
-    apt-get install sendmail
-    nano /etc/hosts
-
-
-  Edit: <b>127.0.0.1 localhost localhost.localdomain HOSTNAME_IF_YOU_HAVE ONE</b>
+  Edit: ```127.0.0.1 localhost localhost.localdomain HOSTNAME_IF_YOU_HAVE ONE```
   
 
 Run Commands:
-
-    /etc/init.d/networking stop
-    /etc/init.d/networking start
-    
+```
+  /etc/init.d/networking stop
+  /etc/init.d/networking start
+```
   Y to everything:
-  
-    sendmailconfig
+```
+  sendmailconfig
+```
 
-  
+<h2>Step Two</h2>
+<h3>Create Main.rs File<h3>
+
+```
+extern crate sendmail;
+
+fn main() {
+
+    // Configure email body and header
+    sendmail::email::create(
+        "noreply@verge.website",
+        "alex.steven.elias@gmail.com",
+        "This Is Subject",
+        "I am the body. hello wolrd!"
+    );
+
+    // Define the actual email address to recieve the email
+    sendmail::email::send("alex.steven.elias@gmail.com");
+
+}
+```
   
   
