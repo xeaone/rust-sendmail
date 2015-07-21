@@ -32,9 +32,10 @@ Run Commands:
     /etc/init.d/networking stop
     /etc/init.d/networking start
     
+  Y to everything:
+  
     sendmailconfig
 
-  Y to everything
   
   
   
