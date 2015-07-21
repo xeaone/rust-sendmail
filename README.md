@@ -16,7 +16,7 @@ The requirments for Rust Sendmail:
 
 
 <h2>Step One</h2>
-<h3>Install sendmail and configure<h3>
+<h3>Install sendmail and configure</h3>
   
 Run Commands:
 ```
