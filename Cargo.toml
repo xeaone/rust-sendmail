@@ -1,0 +1,4 @@
+[package]
+name = "sendmail"
+version = "0.1.0"
+authors = ["Alexander Elias<alex.steve.elias@gmail.com>"]

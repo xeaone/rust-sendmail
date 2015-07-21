@@ -1,0 +1,4 @@
+[root]
+name = "sendmail"
+version = "0.1.0"
+
