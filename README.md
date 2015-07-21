@@ -12,7 +12,7 @@ The requirments for Rust Sendmail:
 </ol>
 
 
-\* Not these instructions assume a Ubuntu machine
+\* Note these instructions assume a Ubuntu machine
 
 
 <h2>Step One</h2>
@@ -20,22 +20,25 @@ The requirments for Rust Sendmail:
   
 Run Commands:
 ```
-  apt-get install sendmail
-  nano /etc/hosts
+apt-get install sendmail
+nano /etc/hosts
 ```
 
-  Edit: ```127.0.0.1 localhost localhost.localdomain HOSTNAME_IF_YOU_HAVE ONE```
+Edit: ```127.0.0.1 localhost localhost.localdomain HOSTNAME_IF_YOU_HAVE ONE```
   
 
 Run Commands:
 ```
-  /etc/init.d/networking stop
-  /etc/init.d/networking start
+/etc/init.d/networking stop
+/etc/init.d/networking start
 ```
-  Y to everything:
+
+Run Command: 
 ```
-  sendmailconfig
+sendmailconfig
 ```
+\* Y to everything
+
 
 <h2>Step Two</h2>
 <h3>Create Main.rs File</h3>
