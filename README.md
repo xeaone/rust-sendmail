@@ -38,7 +38,7 @@ Run Commands:
 ```
 
 <h2>Step Two</h2>
-<h3>Create Main.rs File<h3>
+<h3>Create Main.rs File</h3>
 
 ```
 extern crate sendmail;
