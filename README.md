@@ -2,7 +2,7 @@
 
 Rust sending emails via sendmail.
 
-This is the begning stages of this repo and I am a Rust newbie. Plese provide suggestions or corrections. Currently there is no working mehtod (that I am aware of) to send emails with rust. 
+This is the begning stages of this repo and I am a Rust newbie. Plese provide suggestions or corrections. Currently there is no working mehtod (that I am aware of) to send emails with Rust. So I made rust-sendmail.
 
 
 The requirments for Rust Sendmail:
