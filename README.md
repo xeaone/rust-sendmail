@@ -2,10 +2,10 @@
 
 Rust sending emails via sendmail.
 
-This is the begning stages of this repo and I am a Rust newbie. Plese provide suggestions or corrections. Currently there is no working mehtod (that I am aware of) to send emails with Rust. So I made rust-sendmail.
+This is the beginning stages of this repo and I am a Rust newbie. Please provide suggestions or corrections. Currently there is no working method (that I am aware of) to send emails with Rust. So I made rust-sendmail.
 
 
-The requirments for Rust Sendmail:
+The requirements for Rust Sendmail:
 <ol>
   <li>linux/unix machine</li>
   <li>sendmail installed</li>
@@ -17,7 +17,7 @@ The requirments for Rust Sendmail:
 
 <h2>Step One</h2>
 <h3>Install sendmail and configure</h3>
-  
+
 Run Commands:
 ```
 apt-get install sendmail
@@ -25,7 +25,7 @@ nano /etc/hosts
 ```
 
 Edit: ```127.0.0.1 localhost localhost.localdomain HOSTNAME_IF_YOU_HAVE ONE```
-  
+
 
 Run Commands:
 ```
@@ -33,7 +33,7 @@ Run Commands:
 /etc/init.d/networking start
 ```
 
-Run Command: 
+Run Command:
 ```
 sendmailconfig
 ```
@@ -45,19 +45,23 @@ sendmailconfig
 
 ```
 extern crate sendmail;
+use sendmail::email;
 
 fn main() {
 
-    // Configure email body
-    sendmail::email::create(
-        "This Is Subject",
-        "I am the body. hello wolrd!"
+    // Configure email body and header
+    email::create(
+        // From Address
+        "from.email@example.com",
+        // To Address
+        "to.email@example.com",
+        // Subject
+        "Subject - Hello World!",
+        // Body
+        "<html><body><h1>I am the body. Hello Wolrd!<br/><br/>And I accept html.</h1></body></html>"
     );
 
-    // Define the actual email address to recieve the email
-    sendmail::email::send("to.your.inbox@gmail.com");
-
+    // Define the actual email address to receive the email
+    email::send("your.email@gmail.com");
 }
 ```
-  
-  
