@@ -1,4 +1,14 @@
 [package]
 name = "sendmail"
-version = "0.1.0"
-authors = ["Alexander Elias<alex.steve.elias@gmail.com>"]
+version = "1.0.0"
+authors = ["Alexander Elias<alex.steven.elias@gmail.com>"]
+
+description = "Rust sending emails via sendmail. Works nicely with Iron Framework using form Posts."
+
+repository = "https://github.com/AlexanderElias/rust-sendmail"
+
+readme = "README.md"
+
+keywords = ["Rust","Sendmail","Email"]
+
+license-file = "LICENSE"
