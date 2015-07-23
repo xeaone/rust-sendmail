@@ -1,6 +1,6 @@
 [package]
 name = "sendmail"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Alexander Elias<alex.steven.elias@gmail.com>"]
 
 description = "Rust sending emails via sendmail. Works nicely with Iron Framework using form Posts."
