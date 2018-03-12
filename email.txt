@@ -1,5 +1,0 @@
-From:from.email@example.com
-To:to.email@example.com
-Subject:Subject - Hello World!
-Content-Type: text/html
-<html><body><h1>I am the body. Hello Wolrd! <br/>And I accept html.</h1></body></html>
