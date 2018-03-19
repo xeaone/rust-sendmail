@@ -6,7 +6,7 @@ use std::convert::AsRef;
 
 const CONTENT_TYPE: &'static str = "Content-Type: text/html\n";
 
-pub fn send_new<'a ,T: AsRef<[&'a str]>>(from_address:&str, to_address: T, subject_text: &str, body_text: &str) -> Result<(),Error> {
+pub fn send<'a ,T: AsRef<[&'a str]>>(from_address:&str, to_address: T, subject_text: &str, body_text: &str) -> Result<(),Error> {
 
     let address: &[&str] = to_address.as_ref();
 
