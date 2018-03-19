@@ -48,7 +48,7 @@ use sendmail::email;
 fn main() {
 
     // Configure email body and header
-    email::send_new(
+    email::send(
         // From Address
         "from.email@example.com",
         // To Address
