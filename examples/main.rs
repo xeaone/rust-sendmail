@@ -4,7 +4,7 @@ use sendmail::email;
 fn main() {
 
     // Configure email body and header
-    email::send_new(
+    email::send(
         // From Address
         "test@localhost",
         // To Address
