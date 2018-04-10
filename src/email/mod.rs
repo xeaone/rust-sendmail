@@ -1,44 +1,60 @@
+use std::error::Error;
+use std::fs::File;
+use std::path::Path;
 use std::io::prelude::*;
-use std::process::{Command, Stdio};
-use std::io::{Error,ErrorKind};
-use std::io::BufReader;
-use std::convert::AsRef;
+use std::process::Command;
 
-const CONTENT_TYPE: &'static str = "Content-Type: text/html\n";
 
-pub fn send<'a ,T: AsRef<[&'a str]>>(from_address:&str, to_address: T, subject_text: &str, body_text: &str) -> Result<(),Error> {
+pub fn create (from_address:&str, to_address: &str, subject_text: &str, body_text: &str){
 
-    let address: &[&str] = to_address.as_ref();
+    let from_address = from_address.to_string();
+    let from = "From:".to_string() + &from_address + "\n";
 
-    let mut cmd = Command::new("sendmail");
-    cmd.args(address)
-        .stdin(Stdio::piped())
-        .stdout(Stdio::null())
-        .stderr(Stdio::piped());
-    let mut process = cmd.spawn()?;
-    
-    { // required because of process.wait()
-        let mut stdin = process.stdin.as_mut().ok_or(Error::new(ErrorKind::BrokenPipe, "no stdin"))?;
-        
-        writeln!(&mut stdin,"From: {}",from_address)?;
-        writeln!(&mut stdin,"To: {}",address.join(","))?;
-        writeln!(&mut stdin,"Subject: {}",subject_text)?;
-        stdin.write_all(CONTENT_TYPE.as_bytes())?;
-        stdin.write_all(body_text.as_bytes())?;
-        stdin.flush()?;
+    let to_address = to_address.to_string();
+    let to = "To:".to_string() + &to_address + "\n";
+
+    let subject_text = subject_text.to_string();
+    let subject = "Subject:".to_string() + &subject_text + "\n";
+
+    let content_type = "Content-Type: text/html".to_string() + "\n";
+    let header = from + &to + &subject + &content_type;
+
+    let body = body_text.to_string();
+
+    let header_body = header + &body;
+
+    let path = Path::new("email.txt");
+    let display = path.display();
+
+    // Open a file in write-only mode, returns `io::Result<File>`
+    let mut file = match File::create(&path) {
+        Err(why) => panic!("Couldn't create {}: {}", display, Error::description(&why)),
+        Ok(file) => file
+    };
+
+    // Write the 'text' string to 'file', returns 'io::Result<()>''
+    match file.write_all(header_body.as_bytes()) {
+        Err(why) => panic!("Couldn't write to {}: {}", display, Error::description(&why)),
+        Ok(_) => println!("Successfully wrote to {}", display)
     }
-    
-    process.wait()?;
-    
-    //let mut stdout_buffer = BufReader::new(process.stdout.take()?);
-    let mut stderr_buffer = BufReader::new(process.stderr.ok_or(Error::new(ErrorKind::BrokenPipe, "no stderr"))?);
-    
-    let mut stderr: String = String::new();
-    stderr_buffer.read_to_string(&mut stderr)?;
-    
-    if stderr.is_empty() {
-        Ok(())
-    } else {
-        Err(Error::new(ErrorKind::Other, format!("sendmail returned: {}",stderr)))
-    }
+}
+
+
+pub fn send (to_address: &str) {
+
+    // Send Email using sendmail -t
+    let to_address = to_address.to_string();
+    let sendmail_sh_frist_half = "sendmail ".to_string() + &to_address;
+    let sendmail_sh_second_half = " < email.txt".to_string();
+    let sendmail_sh = sendmail_sh_frist_half + & sendmail_sh_second_half;
+
+    let output = Command::new("sh")
+                    .arg("-c")
+                    .arg(sendmail_sh)
+                    .output()
+                    .unwrap_or_else(|e| { panic!("failed to execute process: {}", e) });
+
+    println!("status: {}", output.status);
+    println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
+    println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
 }
