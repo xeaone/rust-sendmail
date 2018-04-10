@@ -4,14 +4,17 @@ use sendmail::email;
 fn main() {
 
     // Configure email body and header
-    email::send(
+    email::create(
         // From Address
-        "test@localhost",
+        "from.email@example.com",
         // To Address
-        &["root@localhost"],
+        "to.email@example.com",
         // Subject
         "Subject - Hello World!",
         // Body
         "<html><body><h1>I am the body. Hello Wolrd!<br/><br/>And I accept html.</h1></body></html>"
-    ).unwrap();
+    );
+
+    // Define the actual email address to recieve the email
+    email::send("your.email@gmail.com");
 }
